@@ -55,4 +55,9 @@ public class TestUnit {
         System.out.println("文本相似度：" + Comparator.compare(orig, test));
     }
 
+    @Test
+    public void testWriteFile() {
+        FileUtil.writeFile("1", "2", 83.999999999, "O:\\result.txt");
+    }
+
 }

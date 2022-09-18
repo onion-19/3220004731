@@ -1,9 +1,6 @@
 package edu.papers.utils;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class FileUtil {
     public static String readFile(String filepath) {
@@ -30,5 +27,26 @@ public class FileUtil {
             }
         }
         return str;
+    }
+
+    public static boolean writeFile(String origpath, String testpath, double score, String resultpath) {
+        BufferedWriter bwrite = null;
+        try {
+            bwrite = new BufferedWriter(new FileWriter(new File(resultpath)));
+            bwrite.write("论文原文路径：" + origpath + "\n");
+            bwrite.write("抄袭论文路径：" + testpath + "\n");
+            bwrite.write("文本相似度：" + String.format("%.2f", score));
+            bwrite.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(null != bwrite)
+                    bwrite.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return true;
     }
 }
