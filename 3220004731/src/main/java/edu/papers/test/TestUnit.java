@@ -1,9 +1,9 @@
 package edu.papers.test;
 
+import com.huaban.analysis.jieba.SegToken;
 import edu.papers.utils.Comparator;
 import edu.papers.utils.FileUtil;
 import edu.papers.utils.Segmenter;
-import org.apdplat.word.segmentation.Word;
 import org.junit.Test;
 
 import java.util.List;
@@ -16,11 +16,11 @@ public class TestUnit {
         System.out.println(str.substring(0, 50));
     }
 
-    @Test
-    public void testSeg() {
-        List<Word> words = Segmenter.seg(FileUtil.readFile("O:\\orig.txt"));
-        System.out.println(words.toString());
-    }
+//    @Test
+//    public void testSeg() {
+//        List<Word> words = Segmenter.seg(FileUtil.readFile("O:\\orig.txt"));
+//        System.out.println(words.toString());
+//    }
 
 //    @Test
 //    public void testCmpSim() {
@@ -38,13 +38,21 @@ public class TestUnit {
 //        System.out.println("SPhi：" + Comparator.cmpSPhi(orig, test));
 //    }
 
-    @Test
-    public void testWordLowVersion() {
-        List<Word> orig = Segmenter.seg(FileUtil.readFile("O:\\orig.txt"));
-        List<Word> test = Segmenter.seg(FileUtil.readFile("O:\\orig_0.8_add.txt"));
+//    @Test
+//    public void testWordLowVersion() {
+//        List<Word> orig = Segmenter.seg(FileUtil.readFile("O:\\orig.txt"));
+//        List<Word> test = Segmenter.seg(FileUtil.readFile("O:\\orig_0.8_add.txt"));
+//
+//        System.out.println("SimText：" + Comparator.similarityCalculate(orig, test));
+//        System.out.println("SPhi：" + Comparator.scoreImpl(orig, test));
+//    }
 
-        System.out.println("SimText：" + Comparator.similarityCalculate(orig, test));
-        System.out.println("SPhi：" + Comparator.scoreImpl(orig, test));
+    @Test
+    public void testJieba() {
+        List<SegToken> orig = Segmenter.seg(FileUtil.readFile("O:\\orig.txt"));
+        List<SegToken> test = Segmenter.seg(FileUtil.readFile("O:\\orig_0.8_add.txt"));
+
+        System.out.println("文本相似度：" + Comparator.compare(orig, test));
     }
 
 }
