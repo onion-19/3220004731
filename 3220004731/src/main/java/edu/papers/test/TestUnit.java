@@ -60,4 +60,12 @@ public class TestUnit {
         FileUtil.writeFile("1", "2", 83.999999999, "O:\\result.txt");
     }
 
+    @Test
+    public void testSPhi() {
+        List<SegToken> orig = Segmenter.seg(FileUtil.readFile("O:\\orig.txt"));
+        List<SegToken> test = Segmenter.seg(FileUtil.readFile("O:\\orig_0.8_add.txt"));
+
+        System.out.println("文本相似度：" + Comparator.compare(orig, test));
+    }
+
 }
