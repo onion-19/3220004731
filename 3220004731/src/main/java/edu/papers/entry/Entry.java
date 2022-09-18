@@ -29,6 +29,11 @@ public class Entry {
 //    }
 
     public static void main(String[] args) {
+        if(args.length < 3) {
+            System.out.println("请输入正确的参数数量");
+            System.out.println("格式：java -jar main.jar D:\\org.txt D:\\org_add.txt D:\\ans.txt\n");
+            System.exit(0);
+        }
         String origContent = "";
         String testContent = "";
         if(null == (origContent = FileUtil.readFile(args[0])) || null == (testContent = FileUtil.readFile(args[1]))) {
