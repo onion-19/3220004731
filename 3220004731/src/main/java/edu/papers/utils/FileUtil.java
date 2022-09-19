@@ -18,9 +18,8 @@ public class FileUtil {
                 buffer.append(str);
             }
             str = buffer.toString();
-            bread.close();
         } catch (IOException e) {
-            System.out.println("文件 " + filepath + " 不存在");
+            System.out.println("读取文件时出现异常");
         } finally {
             if(null != bread) {
                 try {
@@ -42,7 +41,7 @@ public class FileUtil {
             }
             try {
                 if(!f.createNewFile()) {
-                    System.out.println("结果文件路径 " + resultpath + " 格式有误，结果文件创建失败");
+                    System.out.println("结果文件创建失败");
                     return;
                 }
             } catch (IOException e) {
@@ -58,7 +57,7 @@ public class FileUtil {
             bwrite.write("文本相似度：" + String.format("%.2f", score));
             bwrite.flush();
         } catch (IOException e) {
-            System.out.println("结果文件路径 " + resultpath + " 格式有误");
+            System.out.println("写入文件时出现异常");
         } finally {
             try {
                 if(null != bwrite)
