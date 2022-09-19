@@ -15,8 +15,9 @@ public class FileUtilTest {
         FileUtil.writeFile("o1", "o2", 0.0, "O:\\null");
         FileUtil.writeFile("o1", "o2", 0.0, "\\null");
         FileUtil.writeFile("o1", "o2", 0.0, "O:\\\\");
-        FileUtil.writeFile("o1", "o2", 0.0, "O:\\\\");
         FileUtil.writeFile("o1", "o2", 0.0, "O:\\ans.txt");
+        FileUtil.writeFile("o1", "o2", 0.0, "O:\\z2.txt");
+        FileUtil.writeFile("o1", "o2", 0.0, "O:\\z\\z2.txt");
 
     }
 }
