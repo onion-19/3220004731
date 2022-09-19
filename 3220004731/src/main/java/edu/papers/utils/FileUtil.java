@@ -5,6 +5,7 @@ import java.io.*;
 public class FileUtil {
     public static String readFile(String filepath) {
         File f = new File(filepath);
+        //判断文件是否存在
         if(!f.exists()) {
             System.out.println("文件 " + filepath + " 不存在");
             return null;
@@ -14,6 +15,7 @@ public class FileUtil {
         StringBuffer buffer = new StringBuffer();
         try {
             bread = new BufferedReader(new FileReader(f));
+            //逐行读取文件
             while(null != (str = bread.readLine())) {
                 buffer.append(str);
             }
@@ -35,11 +37,13 @@ public class FileUtil {
     public static void writeFile(String origpath, String testpath, double score, String resultpath) {
         File f = new File(resultpath);
         if(!f.exists()) {
+            //创建文件的上级目录
             if(!f.getParentFile().mkdirs()) {
                 System.out.println("结果文件路径 " + resultpath + " 格式有误，结果文件目录创建失败");
                 return;
             }
             try {
+                //创建文件
                 if(!f.createNewFile()) {
                     System.out.println("结果文件创建失败");
                     return;
@@ -52,6 +56,7 @@ public class FileUtil {
         BufferedWriter bwrite = null;
         try {
             bwrite = new BufferedWriter(new FileWriter(f));
+            //写入文件
             bwrite.write("论文原文路径：" + origpath + "\n");
             bwrite.write("抄袭论文路径：" + testpath + "\n");
             bwrite.write("文本相似度：" + String.format("%.2f", score));

@@ -7,13 +7,9 @@ import java.util.List;
 
 public class Segmenter {
 
-//    public static List<Word> seg(String text) {
-//        List<Word> words = WordSegmenter.segWithStopWords(text);
-//        return words;
-//    }
-
     public static List<SegToken> seg(String text) {
         JiebaSegmenter segmenter = new JiebaSegmenter();
+        //返回分词结果
         return segmenter.process(text, JiebaSegmenter.SegMode.INDEX);
     }
 
