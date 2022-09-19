@@ -21,7 +21,7 @@ public class FileUtil {
             }
             str = buffer.toString();
         } catch (IOException e) {
-            System.out.println("读取文件时出现异常");
+            System.out.println("读取文件 " + filepath + " 时出现异常");
         } finally {
             if(null != bread) {
                 try {
@@ -34,23 +34,65 @@ public class FileUtil {
         return str;
     }
 
+//        if(!f.exists()) {
+//            //创建文件的上级目录
+//            if(!f.getParentFile().mkdirs()) {
+//                System.out.println("结果文件路径 " + resultpath + " 格式有误，结果文件目录创建失败");
+//                return;
+//            }
+//            try {
+//                //创建文件
+//                if(!f.createNewFile()) {
+//                    System.out.println("结果文件创建失败");
+//                    return;
+//                }
+//            } catch (IOException e) {
+//                System.out.println("结果文件路径 " + resultpath + " 格式有误，结果文件创建失败");
+//                return;
+//            }
+//        }
+
+
+//        if(!f.exists()) {
+//            try {
+//                //创建文件
+//                if(!f.createNewFile()) {
+//                    //创建文件的上级目录
+//                    if(!f.getParentFile().mkdirs()) {
+//                        System.out.println("结果文件路径 " + resultpath + " 格式有误，结果文件目录创建失败");
+//                        return;
+//                    }
+//                    //创建文件
+//                    if(!f.createNewFile()) {
+//                        System.out.println("结果文件 " + resultpath + " 创建失败");
+//                        return;
+//                    }
+//                }
+//            } catch (IOException e) {
+//                System.out.println("结果文件路径 " + resultpath + " 格式有误，结果文件创建失败");
+//                return;
+//            }
+//        }
+
     public static void writeFile(String origpath, String testpath, double score, String resultpath) {
         File f = new File(resultpath);
         if(!f.exists()) {
-            //创建文件的上级目录
-            if(!f.getParentFile().mkdirs()) {
-                System.out.println("结果文件路径 " + resultpath + " 格式有误，结果文件目录创建失败");
-                return;
-            }
             try {
                 //创建文件
-                if(!f.createNewFile()) {
-                    System.out.println("结果文件创建失败");
+                f.createNewFile();
+            } catch (IOException e) {
+                //创建上级目录
+                if(!f.getParentFile().mkdirs()) {
+                    System.out.println("结果文件路径 " + resultpath + " 格式有误，结果文件目录创建失败");
                     return;
                 }
-            } catch (IOException e) {
-                System.out.println("结果文件路径 " + resultpath + " 格式有误，结果文件创建失败");
-                return;
+                try {
+                    //创建文件
+                    f.createNewFile();
+                } catch (IOException e1) {
+                    System.out.println("结果文件 " + resultpath + " 创建失败");
+                    return;
+                }
             }
         }
         BufferedWriter bwrite = null;
@@ -62,7 +104,7 @@ public class FileUtil {
             bwrite.write("文本相似度：" + String.format("%.2f", score));
             bwrite.flush();
         } catch (IOException e) {
-            System.out.println("写入文件时出现异常");
+            System.out.println("写入文件 " + resultpath + " 时出现异常");
         } finally {
             try {
                 if(null != bwrite)
